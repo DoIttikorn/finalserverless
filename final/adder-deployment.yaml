@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: adder
+  name: adder
+  namespace: B6014681
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: adder
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      labels:
+        io.kompose.service: adder
+    spec:
+      containers:
+      - image: chanwit/adder
+        imagePullPolicy: ""
+        name: adder
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
+      serviceAccountName: ""
+
